@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+// import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
 
 
 
@@ -19,7 +20,7 @@ class App extends Component {
     showPersons: false
   }
 
-  nameChangeHandler = (event, id) => {
+  nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
@@ -75,14 +76,10 @@ class App extends Component {
         // .map() converts any element from an array (persons from state)
           // it returns a new array - can be even JSX
         <div>  
-          {this.state.persons.map((person, index) => {
-            return <Person 
-              click={() => this.deletePersonHandler(index)}
-              name={person.name} 
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)}/>
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}/>
         </div>
       );
 
@@ -104,12 +101,6 @@ class App extends Component {
 
     return (
         <div className="App">
-          <h1>Hi, I'm react app</h1>
-          <p className={classes.join(' ')}>Some text</p>
-
-          <button 
-            style={style}
-            onClick={this.togglePersonsHandler}>Toggle Persons</button>
             {persons}
         </div>
     );
