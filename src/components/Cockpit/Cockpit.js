@@ -1,13 +1,30 @@
 import React from 'react';
+import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+
+    //styling dynamic
+    const assignedClasses = [];
+    let btnClass = '';
+
+    if(props.showPersons) {
+        btnClass = classes.Red;
+    }
+
+    if(props.persons.length <= 2) {
+      assignedClasses.push('red');
+    }
+    if(props.persons.length <= 1) {
+      assignedClasses.push('bold');
+    }
+
     return (
-        <div>
-            <h1>Hi, I'm react app</h1>
-            <p className={classes.join(' ')}>Some text</p>
+        <div className={classes.Cockpit}>
+            <h1>{ props.appTitle }</h1>
+            <p className={assignedClasses.join(' ')}>Some text</p>
             <button 
-                style={style}
-                onClick={this.togglePersonsHandler}>Toggle Persons</button>
+                className={btnClass}
+                onClick={props.clicked}>Toggle Persons</button>
          </div> 
     );
 }
